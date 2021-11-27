@@ -60,7 +60,7 @@ def manage_repository_config(self, request=None):
 	# -------------------------
 	else:
 		printed.append('<div class="card-body">')
-		printed.append('<div class="alert alert-info m-0 mb-4">IMPORTANT: Please make sure that a certificate based communication with the GIT server is configured properly on the system</div>')
+		printed.append('<div class="alert alert-info m-0 mb-4">IMPORTANT NOTE: Please make sure that a certificate based communication with the GIT server is configured properly on the system</div>')
 		printed.append('<div class="form-group row">')
 		printed.append('<label for="url" class="col-sm-2 control-label mandatory">Working-copy</label>')
 		printed.append('<div class="col-sm-10"><input class="form-control" name="path" type="text" size="25" value="%s" readonly></div>'%base_path)
