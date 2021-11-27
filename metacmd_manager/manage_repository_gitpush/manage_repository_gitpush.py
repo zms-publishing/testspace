@@ -1,7 +1,7 @@
 from Products.zms import standard
 import os
 
-def manage_repository_commit(self, request=None):
+def manage_repository_gitpush(self, request=None):
 	printed = []
 	request = self.REQUEST
 	RESPONSE =  request.RESPONSE
@@ -15,18 +15,19 @@ def manage_repository_commit(self, request=None):
 	printed.append('<html lang="en">')
 	printed.append(self.zmi_html_head(self,request))
 	printed.append('<body class="repository_manager_main %s">'%(' '.join(['zmi',request['lang'],self.meta_id])))
-	printed.append(self.zmi_body_header(self,request,options=[{'action':'#','label':'GIT-%s...'%self.getZMILangStr('BTN_COMMIT')}]))
+	# printed.append(self.zmi_body_header(self,request,options=[{'action':'#','label':'%s...'%self.getZMILangStr('BTN_GITPUSH')}]))
+	printed.append(self.zmi_body_header(self,request,options=self.repository_manager.customize_manage_options()))
 	printed.append('<div id="zmi-tab">')
-	printed.append(self.zmi_breadcrumbs(self,request))
+	printed.append(self.zmi_breadcrumbs(self,request,extra=[self.manage_sub_options()[0]]))
 	printed.append('<div class="card">')
 	printed.append('<form class="form-horizontal" method="post" enctype="multipart/form-data">')
 	printed.append('<input type="hidden" name="lang" value="%s"/>'%request['lang'])
 	printed.append('<input type="hidden" name="came_from" value="%s"/>'%came_from)
-	printed.append('<legend>GIT-%s...</legend>'%(self.getZMILangStr('BTN_COMMIT')))
+	printed.append('<legend>%s...</legend>'%(self.getZMILangStr('BTN_GITPUSH')))
 
 	# --- COMMIT/PUSH. +++IMPORTANT+++: Use SSH/cert and git credential manager
 	# ---------------------------------
-	if btn=='BTN_COMMIT':
+	if btn=='BTN_GITPUSH':
 		message = []
 		### export to working-copy
 		success = self.commitChanges(request.get('ids',[]))
@@ -64,7 +65,7 @@ def manage_repository_commit(self, request=None):
 		printed.append('</div><!-- .form-group -->')
 		printed.append('<div class="form-group">')
 		printed.append('<div class="controls save">')
-		printed.append('<button type="submit" name="btn" class="btn btn-primary" value="BTN_COMMIT">%s</button>'%(self.getZMILangStr('BTN_COMMIT')))
+		printed.append('<button type="submit" name="btn" class="btn btn-primary" value="BTN_GITPUSH">%s</button>'%(self.getZMILangStr('BTN_GITPUSH')))
 		printed.append('<button type="submit" name="btn" class="btn btn-secondary" value="BTN_CANCEL">%s</button>'%(self.getZMILangStr('BTN_CANCEL')))
 		printed.append('</div>')
 		printed.append('</div><!-- .form-group -->')
@@ -76,6 +77,7 @@ def manage_repository_commit(self, request=None):
 	printed.append('</div><!-- .card -->')
 	printed.append('</div><!-- #zmi-tab -->')
 	printed.append(self.zmi_body_footer(self,request))
+	printed.append('<script>$ZMI.registerReady(function(){ $(\'#tabs_items li a\').removeClass(\'active\');$(\'#tabs_items li[data-action*=\"repository_manager\"] a\').addClass(\'active\'); })</script>')
 	printed.append('</body>')
 	printed.append('</html>')
 
