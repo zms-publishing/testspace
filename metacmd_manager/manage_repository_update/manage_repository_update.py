@@ -61,7 +61,7 @@ def manage_repository_update(self, request=None):
 		printed.append('<button type="submit" name="btn" class="btn btn-secondary" value="BTN_CANCEL">%s</button>'%(self.getZMILangStr('BTN_CANCEL')))
 		printed.append('</div>')
 		printed.append('</div><!-- .form-group -->')
-		printed.append(self.manage_main_diff(self,request))
+		# printed.append(self.manage_main_diff(self,request))
 		printed.append('</div><!-- .card-body -->')
 	# ---------------------------------
 
