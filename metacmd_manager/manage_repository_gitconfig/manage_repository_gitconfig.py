@@ -50,7 +50,7 @@ def manage_repository_gitconfig(self, request=None):
 		os.chdir(base_path)
 		command = "git clone %s ."%(url)
 		result = os.system(command)
-		printed.append('<div class="alert alert-info my-3"><code>%s [%s]</code></div>'%(command, str(result)))
+		printed.append('<div class="alert alert-info my-3"><code class="d-block">%s [%s]</code></div>'%(command, str(result)))
 
 	# --- Cancel.
 	# ---------------------------------

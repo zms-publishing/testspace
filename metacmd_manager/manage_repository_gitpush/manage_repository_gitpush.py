@@ -41,13 +41,13 @@ def manage_repository_gitpush(self, request=None):
 		command2 = 'git commit -a -m "%s"'%(request.get('message'))
 		command3 = 'git push'
 		result1 = os.system(command1)
-		message.append('<code>%s [%s]</code>'%(command1, str(result1)))
+		message.append('<code class="d-block">%s [%s]</code>'%(command1, str(result1)))
 		result2 = os.system(command2)
-		message.append('<code>%s [%s]</code>'%(command2, str(result2)))
+		message.append('<code class="d-block">%s [%s]</code>'%(command2, str(result2)))
 		result3 = os.system(command3)
-		message.append('<code>%s [%s]</code>'%(command3, str(result3)))
+		message.append('<code class="d-block mb-3">%s [%s]</code>'%(command3, str(result3)))
 		### return with message
-		request.response.redirect(self.url_append_params('manage_main',{'lang':request['lang'],'manage_tabs_message':'<br/>'.join(message)}))
+		request.response.redirect(self.url_append_params('manage_main',{'lang':request['lang'],'manage_tabs_message':''.join(message)}))
 
 	# --- Cancel.
 	# ---------------------------------
