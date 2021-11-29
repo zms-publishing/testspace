@@ -23,7 +23,8 @@ def manage_repository_gitpush(self, request=None):
 	printed.append('<form class="form-horizontal" method="post" enctype="multipart/form-data">')
 	printed.append('<input type="hidden" name="lang" value="%s"/>'%request['lang'])
 	printed.append('<input type="hidden" name="came_from" value="%s"/>'%came_from)
-	printed.append('<legend>%s...</legend>'%(self.getZMILangStr('BTN_GITPUSH')))
+	printed.append('<legend>%s, Current Branch %s</legend>'%(self.getZMILangStr('BTN_GITPUSH'),self.getConfProperty('ZMSRepository.git.server.branch','master')))
+
 
 	# --- COMMIT/PUSH. +++IMPORTANT+++: Use SSH/cert and git credential manager
 	# ---------------------------------

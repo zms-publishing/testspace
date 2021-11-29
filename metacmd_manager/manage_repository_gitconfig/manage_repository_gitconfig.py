@@ -28,7 +28,7 @@ def manage_repository_gitconfig(self, request=None):
 	printed.append('<form class="form-horizontal" method="post" enctype="multipart/form-data">')
 	printed.append('<input type="hidden" name="lang" value="%s"/>'%request['lang'])
 	printed.append('<input type="hidden" name="came_from" value="%s"/>'%came_from)
-	printed.append('<legend>GIT-%s...</legend>'%self.getZMILangStr('TAB_CONFIGURATION'))
+	printed.append('<legend>GIT-%s, Current Branch %s</legend>'%(self.getZMILangStr('TAB_CONFIGURATION'),self.getConfProperty('ZMSRepository.git.server.branch','master')))
 
 	# --- Change.
 	# ---------------------------------
