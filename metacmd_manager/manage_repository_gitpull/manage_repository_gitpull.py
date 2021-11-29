@@ -33,15 +33,19 @@ def manage_repository_gitpull(self, request=None):
 		# userid = self.getConfProperty('ZMSRepository.git.server.userid')
 		# password = self.getConfProperty('ZMSRepository.git.server.password') # TODO: decrypt
 		# url = self.getConfProperty('ZMSRepository.git.server.url')
-		command = 'git checkout master;git pull'
-		if request.get('revision')!='HEAD' and request.get('revision') is not None:
-			command = 'git checkout %s'%(request.get('revision'))
-		os.chdir(base_path)
-		result = os.system(command)
-		message.append('<code class="d-block mb-3">%s [%s]</code>'%(command, str(result)))
-		### import from working-copy
-		# success = self.updateChanges(REQUEST.get('ids',[]),btn=='override')
-		# message.append(self.getZMILangStr('MSG_IMPORTED')%('<em>%s</em>'%' '.join(success)))
+		if len([x for x in request['AUTHENTICATED_USER'].getRolesInContext(self) if x in ['Manager','ZMSAdminstrator']]) > 0:
+			branch = self.getConfProperty('ZMSRepository.git.server.branch','master')
+			command = 'git checkout %s;git pull'%(branch.replace('"','').replace(';',''))
+			if request.get('revision')!='HEAD' and request.get('revision') is not None:
+				command = 'git checkout %s'%(request.get('revision').replace('"','').replace(';',''))
+			os.chdir(base_path)
+			result = os.system(command)
+			message.append('<code class="d-block mb-3">%s [%s]</code>'%(command, str(result)))
+			### import from working-copy
+			# success = self.updateChanges(REQUEST.get('ids',[]),btn=='override')
+			# message.append(self.getZMILangStr('MSG_IMPORTED')%('<em>%s</em>'%' '.join(success)))
+		else:
+			message.append('Error: To execute this function a user role Manager or ZMSAdministrator is needed.')
 		### return with message
 		request.response.redirect(self.url_append_params('manage_main',{'lang':request['lang'],'manage_tabs_message':''.join(message)}))
 

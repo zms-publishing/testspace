@@ -35,6 +35,7 @@ def manage_repository_gitconfig(self, request=None):
 	if btn=='BTN_CHANGE':
 		message = []
 		self.setConfProperty('ZMSRepository.git.server.url',request['url'])
+		self.setConfProperty('ZMSRepository.git.server.branch',request['branch'])
 		# self.setConfProperty('ZMSRepository.git.server.userid',request['userid'])
 		# if request['password'] != '******':
 		# 	self.setConfProperty('ZMSRepository.git.server.password',request['password']) # TODO: encrypt
@@ -69,6 +70,10 @@ def manage_repository_gitconfig(self, request=None):
 		printed.append('<div class="form-group row">')
 		printed.append('<label for="url" class="col-sm-2 control-label mandatory">Server</label>')
 		printed.append('<div class="col-sm-10"><input class="form-control" name="url" type="text" size="25" value="%s"></div>'%self.getConfProperty('ZMSRepository.git.server.url','git@github.com:myname/myproject.git'))
+		printed.append('</div><!-- .form-group -->')
+		printed.append('<div class="form-group row">')
+		printed.append('<label for="branch" class="col-sm-2 control-label mandatory">Branch Name</label>')
+		printed.append('<div class="col-sm-10"><input class="form-control" name="branch" placeholder="master" type="text" size="25" value="%s"></div>'%self.getConfProperty('ZMSRepository.git.server.branch','master'))
 		printed.append('</div><!-- .form-group -->')
 		# printed.append('<div class="form-group row">')
 		# printed.append('<label for="userid" class="col-sm-2 control-label mandatory">User-ID</label>')
