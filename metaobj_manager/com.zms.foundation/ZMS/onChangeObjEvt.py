@@ -9,6 +9,7 @@
 ##
 # --// ZMS.onChangeObjEvt //--
 
+### Test
 request = zmscontext.REQUEST
 # permalinks
 if 'permalink_key__' in request and 'permalink_val__' in request:
