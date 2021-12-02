@@ -1,4 +1,4 @@
-<!-- ZMS.standard_html -->
+<!-- ZMS.standard_html foo -->
 
 <tal:block tal:define="global 
 		zmscontext options/zmscontext"
