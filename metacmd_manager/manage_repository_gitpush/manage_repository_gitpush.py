@@ -41,7 +41,7 @@ def manage_repository_gitpush(self, request=None):
 			userid = str(request.get('AUTHENTICATED_USER'))[0:3]
 			os.chdir(base_path)
 			command1 = 'git add .'
-			command2 = 'git commit -a -m "%s (%s)"'%(request.get('message').replace('"','').replace(';',''), userid)
+			command2 = 'git commit -a -m "%s" --author="%s"'%(request.get('message').replace('"','').replace(';',''), userid)
 			command3 = 'git push'
 			result1 = os.system(command1)
 			message.append('<code class="d-block">%s [%s]</code>'%(command1, str(result1)))

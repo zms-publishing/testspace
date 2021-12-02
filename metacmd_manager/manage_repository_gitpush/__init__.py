@@ -13,7 +13,7 @@ class manage_repository_gitpush:
 	description = ""
 
 	# Execution
-	execution = False
+	execution = 0
 
 	# Icon_clazz
 	icon_clazz = "fas fa-forward"
@@ -31,7 +31,7 @@ class manage_repository_gitpush:
 	nodes = "{$}"
 
 	# Revision
-	revision = "5.0.0"
+	revision = "5.0.1"
 
 	# Roles
 	roles = ["ZMSAdministrator"]
