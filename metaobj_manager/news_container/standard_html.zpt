@@ -1,0 +1,7 @@
+<!-- news_container.standard_html test-->
+
+<tal:block tal:define="
+		zmscontext options/zmscontext">
+</tal:block>
+
+<!-- /news_container.standard_html -->
